@@ -8,6 +8,7 @@ function App() {
   ])
   const [form, setForm] = useState( {title: '', dec: ''})
   const [formStatus, setFormStatus] = useState('add')
+  const [lastId, setLastId] = useState(todos[todos.length-1].id)
 
 
   const handleDelete = id => {
@@ -25,7 +26,8 @@ function App() {
   const handleSubmit = e => {
     e.preventDefault()
     if (formStatus === 'add'){
-      setTodos( [...todos, {id: 1, title: form.title, dec: form.dec, state: false}])
+      setTodos( [...todos, {id: lastId+1, title: form.title, dec: form.dec, state: false}])
+      setLastId(lastId+1)
     }
     else {
       setTodos(todos.map(todo => todo.id === form.id ? form: todo))
