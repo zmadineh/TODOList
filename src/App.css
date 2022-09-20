@@ -1,38 +1,217 @@
-.App {
-  text-align: center;
+* {
+  margin: 0;
+  padding: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.center {
+  display: flex;
+  justify-content: center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100px;
+  background: linear-gradient(#F9A567, #ED7167);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.header h1 {
+  color: #fff;
+}
+
+.main {
+  width: 100%;
+  height: 860px;
+  background-color: #fafafa;
+}
+
+
+/* start todo list styles */
+.todoItem {
+  display: flex;
+  border: 1px solid #D8D8D8;
+  border-radius: 30px;
+  box-shadow: 0 -1px 0 #e5e5e5,0 0 2px rgba(0,0,0,.12),0 2px 4px rgba(0,0,0,.24);
+  margin: 20px;
+  padding: 15px 20px;
+  background-color: #ffffff;
+}
+
+.todoItem:hover {
+  box-shadow: 0 0 6px rgba(0,0,0,.16),0 6px 12px rgba(0,0,0,.32);
+  border-bottom: 1px solid rgba(0,0,0,.18);
+}
+
+.checkItem {
+  flex: 10%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  border-color: #D8D8D8;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.notDoneCircle {
+  color: #fff;
+  font-size: 20px;
+}
+
+.doneCircle {
+  color: #0de04a;
+  font-size: 20px;
+}
+
+.todoText {
+  flex: 70%;
   display: flex;
   flex-direction: column;
+}
+
+.todoDec {
+  transition-duration: 0.2s;
+}
+
+.todoButton {
+  flex: 20%;
+  display: flex;
+  justify-content: end;
   align-items: center;
+}
+
+.todoButton button {
+  height: 30px;
+  width: 30px;
+  border: 1px solid gray;
+  border-radius: 50%;
+  margin: 0 5px;
+  color: #494949;
+}
+/* end todo list styles */
+
+
+/* start todo form styles */
+
+.form-container{
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.wrapper {
+  height: 1px;
+  overflow: hidden;
+}
+
+.addNewItem {
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  background-color: #fff;
+  border: 1px solid #EC345A;
+  color: #EC345A;
+  border-radius: 20px;
+  height: 40px;
 }
 
-.App-link {
-  color: #61dafb;
+.selectLabel {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.tagsColorContainer {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  line-height: 10px;
+}
+
+.tagsColor {
+  margin: 5px;
+  min-width: 30px;
+  min-height: 30px;
+  padding: 5px;
+  color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.color_input {
+  opacity: 10%;
+  cursor: pointer;
+  height: 30px;
+  width: 30px;
+}
+
+.todoForm {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  margin-right: 20px;
+}
+
+.formTitle_input {
+  width: 90%;
+  min-height: 40px;
+  margin: 10px 0;
+  border-radius: 10px;
+  border: 1px solid #8a8a8a;
+  padding-left: 10px;
+}
+
+.formTitle_input:focus-visible {
+  border-color: #494949;
+}
+
+.formDec_input {
+  width: 90%;
+  min-height: 60px;
+  margin: 10px 0;
+  border-radius: 10px;
+  border: 1px solid #8a8a8a;
+  padding-left: 10px;
+}
+
+.formDec_input:focus-visible {
+  border-color: #494949;
+}
+
+.formBtnContainer{
+  display: flex;
+  justify-content: start;
+}
+
+.formSubmit_btn {
+  margin-top: 20px;
+  display: inline-block;
+  outline: none;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 14px 24px;
+  border: none;
+  background: linear-gradient(#F9A567, #ED7167);;
+  color: #fff;
+}
+
+/* end todo list styles */
+
+@media only screen and (min-width: 527px) {
+  .main {
+    width: 80%;
   }
-  to {
-    transform: rotate(360deg);
+}
+@media only screen and (min-width: 768px) {
+  .main {
+    width: 50%;
   }
 }
