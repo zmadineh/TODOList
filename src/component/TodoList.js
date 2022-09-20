@@ -24,7 +24,7 @@ const TodoList = ({setForm, setFormStatus, todos, setTodos, tags, setFormEnable}
 
     return (
         <div className='todoContainer'>
-        {todos.map(todo => (
+        {todos.length>0 ? todos.map(todo => (
                 <div className="todoItem" style={todo.state ? {borderColor: '#D8D8D8'} : {borderColor: tags.filter(t => t.tag == todo.tag)[0].color, backgroundColor: tags.filter(t => t.tag == todo.tag)[0].color}}>
                     <div className='checkItem'>
                         <div onClick={() => handleCheck(todo.id)}>
@@ -48,7 +48,11 @@ const TodoList = ({setForm, setFormStatus, todos, setTodos, tags, setFormEnable}
                         </button>
                     </div>
                 </div>
-            ))}
+            )) :
+        <div>
+            !!!!!
+        </div>
+            }
         </div>
     )
 }

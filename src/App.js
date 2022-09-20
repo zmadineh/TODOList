@@ -1,4 +1,4 @@
-import React , {component} from "react";
+import React from "react";
 import { useState } from "react";
 import './App.css';
 import TodoForm from "./component/TodoForm";
@@ -32,7 +32,6 @@ function App() {
             <div className='header'>
                 <h1 style={{margin: '20px'}}>ToDo</h1>
             </div>
-
 
           <TodoForm lastId={lastId} setLastId={setLastId} form={form} setForm={setForm} formStatus={formStatus} setFormStatus={setFormStatus} todos={todos} setTodos={setTodos} tags={tags} setTags={setTags} formEnable={formEnable} setFormEnable={setFormEnable}/>
           <TodoList setForm={setForm} setFormStatus={setFormStatus} todos={todos} setTodos={setTodos} tags={tags} setFormEnable={setFormEnable}/>
