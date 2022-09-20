@@ -1,5 +1,4 @@
 import React from "react";
-import '../style/form.css';
 import '../App.css';
 
 const TodoForm = ({lastId, setLastId, form, setForm, formStatus, setFormStatus, todos, setTodos, tags, setTags , formEnable, setFormEnable}) => {

@@ -27,10 +27,19 @@
   width: 100%;
   height: 860px;
   background-color: #fafafa;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 
 /* start todo list styles */
+.todoContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
 .todoItem {
   display: flex;
   border: 1px solid #D8D8D8;
@@ -100,6 +109,7 @@
   margin: 20px;
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .wrapper {
@@ -116,10 +126,11 @@
   color: #EC345A;
   border-radius: 20px;
   height: 40px;
+  margin: 20px;
 }
 
 .selectLabel {
-  margin-top: 30px;
+  margin: 30px 20px 0 20px;
   display: flex;
   flex-direction: column;
 }
@@ -154,7 +165,7 @@
   display: flex;
   flex-direction: column;
   align-items: start;
-  margin-right: 20px;
+  margin: 0 20px;
 }
 
 .formTitle_input {
@@ -186,6 +197,7 @@
 .formBtnContainer{
   display: flex;
   justify-content: start;
+  margin: 0 20px;
 }
 
 .formSubmit_btn {
@@ -207,11 +219,23 @@
 
 @media only screen and (min-width: 527px) {
   .main {
-    width: 80%;
+    width: 100%;
+  }
+  .todoContainer {
+    max-width: 500px;
+  }
+  .form-container {
+    max-width: 500px;
   }
 }
 @media only screen and (min-width: 768px) {
   .main {
-    width: 50%;
+    width: 100%;
+  }
+  .todoContainer {
+    max-width: 600px;
+  }
+  .form-container {
+    max-width: 600px;
   }
 }

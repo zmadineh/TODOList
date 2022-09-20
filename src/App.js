@@ -35,7 +35,7 @@ function App() {
 
 
           <TodoForm lastId={lastId} setLastId={setLastId} form={form} setForm={setForm} formStatus={formStatus} setFormStatus={setFormStatus} todos={todos} setTodos={setTodos} tags={tags} setTags={setTags} formEnable={formEnable} setFormEnable={setFormEnable}/>
-          <TodoList setForm={setForm} setFormStatus={setFormStatus} todos={todos} setTodos={setTodos} tags={tags}/>
+          <TodoList setForm={setForm} setFormStatus={setFormStatus} todos={todos} setTodos={setTodos} tags={tags} setFormEnable={setFormEnable}/>
 
         </div>
       </div>

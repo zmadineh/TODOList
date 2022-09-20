@@ -1,9 +1,8 @@
 import React from "react";
 import { FaCheckCircle, FaRegCircle, FaRegTrashAlt, FaEdit } from "react-icons/fa";
-import '../style/list.css';
 import '../App.css';
 
-const TodoList = ({setForm, setFormStatus, todos, setTodos, tags}) => {
+const TodoList = ({setForm, setFormStatus, todos, setTodos, tags, setFormEnable}) => {
 
     const handleDelete = id => {
         setTodos(todos.filter(todo => todo.id !== id))
@@ -14,6 +13,7 @@ const TodoList = ({setForm, setFormStatus, todos, setTodos, tags}) => {
     }
 
     const handleUpdate = todo => {
+        setFormEnable(true)
         setFormStatus('update')
         setForm(todo)
     }
@@ -23,7 +23,7 @@ const TodoList = ({setForm, setFormStatus, todos, setTodos, tags}) => {
     }
 
     return (
-        <div>
+        <div className='todoContainer'>
         {todos.map(todo => (
                 <div className="todoItem" style={todo.state ? {borderColor: '#D8D8D8'} : {borderColor: tags.filter(t => t.tag == todo.tag)[0].color, backgroundColor: tags.filter(t => t.tag == todo.tag)[0].color}}>
                     <div className='checkItem'>
