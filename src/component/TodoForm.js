@@ -3,6 +3,8 @@ import {useDispatch} from "react-redux";
 //import {useSelector} from "react-redux";
 import {addTodo, updateTodo} from "../toolkit/slices/todo.slice";
 import '../App.css';
+import clsx from "clsx";
+import {emptyForm} from "../data/emptyForm";
 
 const TodoForm = ({lastId, setLastId, form, setForm, formStatus, setFormStatus, tags, setTags , formEnable, setFormEnable}) => {
 
@@ -22,11 +24,9 @@ const TodoForm = ({lastId, setLastId, form, setForm, formStatus, setFormStatus, 
             else {
                 const newTodo =  {
                     id: lastId + 1,
-                    title: form.title,
-                    dec: form.dec,
                     check: false,
-                    tag: form.tag,
-                    active: false
+                    active: false,
+                    ...form,
                 };
                 dispatch(addTodo(newTodo));
                 setLastId(lastId + 1)
@@ -39,20 +39,20 @@ const TodoForm = ({lastId, setLastId, form, setForm, formStatus, setFormStatus, 
     }
 
     const closeForm = () => {
-        setForm({title: '', dec:'', tag:'default'})
+        setForm(emptyForm)
         setFormStatus('close')
         setFormEnable(false)
     }
 
     return (
         <div className='form-container'>
-            <div className='wrapper' style={formEnable ? {height: '100%'} : {height: '1px'}}>
+            <div className={clsx('wrapper', formEnable && 'max_h', !formEnable && 'min_h')}>
                 <form onSubmit={handleSubmit}>
                     <div className='todoForm'>
                         <h4>Title</h4>
-                        <input className='formTitle_input' onChange={handleChange} name={'title'} value={form.title} style={{marginRight: '20px'}}/>
+                        <input className={clsx('formTitle_input', 'margin_20')} onChange={handleChange} name={'title'} value={form.title} />
                         <h4>Description</h4>
-                        <input className='formDec_input' onChange={handleChange} name={'dec'} value={form.dec} style={{marginRight: '20px'}}/>
+                        <input className={clsx('formDec_input', 'margin_20')}  onChange={handleChange} name={'dec'} value={form.dec} />
                     </div>
 
                     <div className='selectLabel'>

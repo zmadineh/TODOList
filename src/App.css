@@ -8,6 +8,34 @@
   justify-content: center;
 }
 
+.d-flex {
+  display: flex;
+}
+
+.d-none {
+  display: none;
+}
+
+.relative_pos{
+  position: relative;
+}
+
+.absolute_pos{
+  position: absolute;
+}
+
+.margin_20 {
+  margin: 20px;
+}
+
+.max_h {
+  height: 100%;
+}
+
+.min_h{
+  height: 1px;
+}
+
 .header {
   position: sticky;
   top: 0;
@@ -19,8 +47,9 @@
   align-items: center;
 }
 
-.header h1 {
+.header_title {
   color: #fff;
+  margin: 20px;
 }
 
 .add_btn {
@@ -121,6 +150,10 @@
   margin: 0 5px;
   color: #494949;
 }
+
+.todo_checkBox {
+  border-color: #D8D8D8;
+}
 /* end todo list styles */
 
 
@@ -134,7 +167,7 @@
 }
 
 .wrapper {
-  height: 1px;
+  /*height: 1px;*/
   overflow: hidden;
 }
 
@@ -240,6 +273,11 @@
   border: none;
   background: linear-gradient(#F9A567, #ED7167);;
   color: #fff;
+}
+
+.todo_checked {
+  color: #959595;
+  text-decoration-line: line-through;
 }
 
 /* end todo list styles */

@@ -1,8 +1,9 @@
 import React from "react";
-import { FaCheckCircle, FaRegCircle, FaRegTrashAlt, FaEdit, FaPlus } from "react-icons/fa";
+import { FaCheckCircle, FaRegCircle, FaRegTrashAlt, FaEdit } from "react-icons/fa";
 import '../App.css';
 import {useDispatch, useSelector} from "react-redux";
 import {removeTodo, checkTodo, showTodoDec} from "../toolkit/slices/todo.slice";
+import clsx from "clsx";
 
 const TodoList = ({setForm, setFormStatus, tags, setFormEnable}) => {
 
@@ -27,20 +28,29 @@ const TodoList = ({setForm, setFormStatus, tags, setFormEnable}) => {
         dispatch(showTodoDec(todo));
     }
 
+    const handleTagColor = todo => {
+        const tagColor = tags.filter(t => t.tag === todo.tag)[0].color;
+        const style = {
+            borderColor: tagColor,
+            backgroundColor: tagColor,
+        }
+        return style;
+    }
+
     return (
         <div className='todoContainer'>
-        {todos.length>0 ? todos.map(todo => (
-                <div key={todo.id} className="todoItem" style={todo.check ? {borderColor: '#D8D8D8'} : {borderColor: tags.filter(t => t.tag === todo.tag)[0].color, backgroundColor: tags.filter(t => t.tag === todo.tag)[0].color}}>
+        {todos.length > 0 ? todos.map(todo => (
+                <div key={todo.id} className="todoItem" style={todo.check ? {borderColor: '#D8D8D8'} :  handleTagColor(todo)}>
                     <div className='checkItem'>
                         <div onClick={() => handleCheck(todo)}>
                             {todo.check ? <FaCheckCircle className='doneCircle'/> : <FaRegCircle className='notDoneCircle'/>}
                         </div>
                     </div>
                     <div className='todoText'  onClick={() => showDec(todo)}>
-                        <h4 className='todoTitle' style={todo.check ? {color: '#959595', textDecorationLine: 'line-through' } : {}}>
+                        <h4 className={clsx('todoTitle', todo.check && 'todo_checked')}>
                             {todo.title}
                         </h4>
-                        <p className='todoDec' style={todo.active ? {display: 'flex'} : {display: 'none'}}>
+                        <p className={clsx('todoDec', todo.active && 'd-flex', !todo.active && 'd-none')}>
                             {todo.dec}
                         </p>
                     </div>

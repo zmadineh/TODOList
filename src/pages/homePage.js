@@ -4,6 +4,8 @@ import React, {useState} from "react";
 import '../App.css';
 import {useSelector} from "react-redux";
 import {FaPlus} from "react-icons/fa";
+import {emptyForm} from "../data/emptyForm";
+import clsx from "clsx";
 
 const HomePage = () => {
 
@@ -20,7 +22,7 @@ const HomePage = () => {
 
     const todos = useSelector((state) => state.todo.todos);
 
-    const [form, setForm] = useState( {title: '', dec: '', tag: 'default'})
+    const [form, setForm] = useState( emptyForm)
     const [formStatus, setFormStatus] = useState('add')
     const [lastId, setLastId] = useState(todos[todos.length-1].id)
     const [formEnable, setFormEnable] = useState(false)
@@ -31,10 +33,10 @@ const HomePage = () => {
     }
 
     return (
-        <div className='center' style={{position:"relative"}}>
+        <div className={clsx('center', 'relative_pos')} >
             <div className='main'>
                 <div className='header'>
-                    <h1 style={{margin: '20px'}}>ToDo</h1>
+                    <h1 className={'header_title'}>ToDo</h1>
                 </div>
 
                 <TodoForm lastId={lastId} setLastId={setLastId} form={form} setForm={setForm} formStatus={formStatus} setFormStatus={setFormStatus} tags={tags} setTags={setTags} formEnable={formEnable} setFormEnable={setFormEnable}/>
