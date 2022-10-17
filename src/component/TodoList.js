@@ -1,15 +1,20 @@
 import React from "react";
-import { FaCheckCircle, FaRegCircle, FaRegTrashAlt, FaEdit } from "react-icons/fa";
+import { FaCheckCircle, FaRegCircle, FaRegTrashAlt, FaEdit, FaPlus } from "react-icons/fa";
 import '../App.css';
+import {useDispatch, useSelector} from "react-redux";
+import {removeTodo, checkTodo, showTodoDec} from "../toolkit/slices/todo.slice";
 
-const TodoList = ({setForm, setFormStatus, todos, setTodos, tags, setFormEnable}) => {
+const TodoList = ({setForm, setFormStatus, tags, setFormEnable}) => {
 
-    const handleDelete = id => {
-        setTodos(todos.filter(todo => todo.id !== id))
+    const todos = useSelector((state) => state.todo.todos);
+    const dispatch = useDispatch();
+
+    const handleDelete = todo => {
+        dispatch(removeTodo(todo));
     }
 
-    const handleCheck = id => {
-        setTodos(todos.map(todo => todo.id === id ? {...todo, state: !todo.state} : todo))
+    const handleCheck = todo => {
+        dispatch(checkTodo(todo));
     }
 
     const handleUpdate = todo => {
@@ -18,21 +23,21 @@ const TodoList = ({setForm, setFormStatus, todos, setTodos, tags, setFormEnable}
         setForm(todo)
     }
 
-    const showDec = id => {
-        setTodos(todos.map(todo => todo.id === id ? {...todo, active: true} : {...todo, active: false}))
+    const showDec = todo => {
+        dispatch(showTodoDec(todo));
     }
 
     return (
         <div className='todoContainer'>
         {todos.length>0 ? todos.map(todo => (
-                <div className="todoItem" style={todo.state ? {borderColor: '#D8D8D8'} : {borderColor: tags.filter(t => t.tag == todo.tag)[0].color, backgroundColor: tags.filter(t => t.tag == todo.tag)[0].color}}>
+                <div key={todo.id} className="todoItem" style={todo.check ? {borderColor: '#D8D8D8'} : {borderColor: tags.filter(t => t.tag === todo.tag)[0].color, backgroundColor: tags.filter(t => t.tag === todo.tag)[0].color}}>
                     <div className='checkItem'>
-                        <div onClick={() => handleCheck(todo.id)}>
-                            {todo.state ? <FaCheckCircle className='doneCircle'/> : <FaRegCircle className='notDoneCircle'/>}
+                        <div onClick={() => handleCheck(todo)}>
+                            {todo.check ? <FaCheckCircle className='doneCircle'/> : <FaRegCircle className='notDoneCircle'/>}
                         </div>
                     </div>
-                    <div className='todoText'  onClick={() => showDec(todo.id)}>
-                        <h4 className='todoTitle' style={todo.state ? {color: '#959595', textDecorationLine: 'line-through' } : {}}>
+                    <div className='todoText'  onClick={() => showDec(todo)}>
+                        <h4 className='todoTitle' style={todo.check ? {color: '#959595', textDecorationLine: 'line-through' } : {}}>
                             {todo.title}
                         </h4>
                         <p className='todoDec' style={todo.active ? {display: 'flex'} : {display: 'none'}}>
@@ -40,7 +45,7 @@ const TodoList = ({setForm, setFormStatus, todos, setTodos, tags, setFormEnable}
                         </p>
                     </div>
                     <div className='todoButton'>
-                        <button onClick={() => handleDelete(todo.id)}>
+                        <button onClick={() => handleDelete(todo)}>
                             <FaRegTrashAlt className='todoIcon'/>
                         </button>
                         <button onClick={() => handleUpdate(todo)}>

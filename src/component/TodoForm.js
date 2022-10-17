@@ -1,42 +1,47 @@
 import React from "react";
+import {useDispatch} from "react-redux";
+//import {useSelector} from "react-redux";
+import {addTodo, updateTodo} from "../toolkit/slices/todo.slice";
 import '../App.css';
 
-const TodoForm = ({lastId, setLastId, form, setForm, formStatus, setFormStatus, todos, setTodos, tags, setTags , formEnable, setFormEnable}) => {
+const TodoForm = ({lastId, setLastId, form, setForm, formStatus, setFormStatus, tags, setTags , formEnable, setFormEnable}) => {
+
+    //const todos = useSelector((state) => state.todo.todos);
+    const dispatch = useDispatch();
 
     const handleChange = e => {
         setTags(tags.map(t => t.tag === e.target.value ? {...t ,check: true} : {...t ,check: false}))
         setForm({...form, [e.target.name]: e.target.value})
-        //console.log(e.target.value)
     }
 
     const handleSubmit = e => {
         e.preventDefault()
         if (formStatus === 'add'){
-            if (form.title == '' || form.dec == '' || form.tag == '')
+            if (form.title === '' || form.dec === '' || form.tag === '')
                 alert('Enter inputs')
             else {
-                setTodos([...todos, {
+                const newTodo =  {
                     id: lastId + 1,
                     title: form.title,
                     dec: form.dec,
-                    state: false,
+                    check: false,
                     tag: form.tag,
                     active: false
-                }])
+                };
+                dispatch(addTodo(newTodo));
                 setLastId(lastId + 1)
             }
         }
         else {
-            setTodos(todos.map(todo => todo.id === form.id ? form: todo))
-            console.log(form.tag)
+            dispatch(updateTodo(form));
+            closeForm();
         }
-        setForm({title: '', dec:'', tag:'default'})
-        setFormStatus('add')
-        setFormEnable(false)
     }
 
-    const handleForm= () => {
-        setFormEnable(true)
+    const closeForm = () => {
+        setForm({title: '', dec:'', tag:'default'})
+        setFormStatus('close')
+        setFormEnable(false)
     }
 
     return (
@@ -54,8 +59,8 @@ const TodoForm = ({lastId, setLastId, form, setForm, formStatus, setFormStatus, 
                         <h4>Select label: </h4>
                         <div className='tagsColorContainer'>
                             {tags.map(t => (
-                                <div className='tagsColor' style={{backgroundColor: t.color}}>
-                                    <input className='color_input' type={"checkbox"} onClick={handleChange} name={'tag'} value={t.tag} checked={t.check}/>
+                                <div key={t.tag} className='tagsColor' style={{backgroundColor: t.color}}>
+                                    <input className='color_input' type={"checkbox"} onChange={handleChange} name={'tag'} value={t.tag} checked={t.check}/>
                                 </div>
                             ))}
                         </div>
@@ -65,6 +70,9 @@ const TodoForm = ({lastId, setLastId, form, setForm, formStatus, setFormStatus, 
                     <div className='formBtnContainer'>
                         <button className='formSubmit_btn' type={'submit'}>
                             {formStatus === 'add' ? 'submit' : 'update'}
+                        </button>
+                        <button className='formSubmit_btn' onClick={closeForm}>
+                            close
                         </button>
                     </div>
 
