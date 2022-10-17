@@ -41,9 +41,6 @@ const TodoForm = ({lastId, setLastId, form, setForm, formStatus, setFormStatus, 
 
     return (
         <div className='form-container'>
-            <div className='addNewItem' onClick={handleForm} style={formEnable ? {display: 'none'} : {display: 'flex'}}>
-               <span>+ Add new</span>
-            </div>
             <div className='wrapper' style={formEnable ? {height: '100%'} : {height: '1px'}}>
                 <form onSubmit={handleSubmit}>
                     <div className='todoForm'>

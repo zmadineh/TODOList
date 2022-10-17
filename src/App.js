@@ -28,7 +28,7 @@ function App() {
 
   return (
       <div className='center'>
-        <div className='main'>
+        <div className='main'>`
             <div className='header'>
                 <h1 style={{margin: '20px'}}>ToDo</h1>
             </div>
