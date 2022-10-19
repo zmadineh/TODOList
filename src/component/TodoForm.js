@@ -1,6 +1,5 @@
 import React from "react";
 import {useDispatch} from "react-redux";
-//import {useSelector} from "react-redux";
 import {addTodo, updateTodo} from "../toolkit/slices/todo.slice";
 import '../App.css';
 import clsx from "clsx";
@@ -8,11 +7,11 @@ import {emptyForm} from "../data/emptyForm";
 
 const TodoForm = ({lastId, setLastId, form, setForm, formStatus, setFormStatus, tags, setTags , formEnable, setFormEnable}) => {
 
-    //const todos = useSelector((state) => state.todo.todos);
     const dispatch = useDispatch();
 
     const handleChange = e => {
-        setTags(tags.map(t => t.tag === e.target.value ? {...t ,check: true} : {...t ,check: false}))
+        console.log(form)
+        setTags(tags.map(t => t.label === e.target.value ? {...t ,check: true} : {...t ,check: false}))
         setForm({...form, [e.target.name]: e.target.value})
     }
 
@@ -24,12 +23,13 @@ const TodoForm = ({lastId, setLastId, form, setForm, formStatus, setFormStatus, 
             else {
                 const newTodo =  {
                     id: lastId + 1,
-                    check: false,
+                    completed: false,
                     active: false,
                     ...form,
                 };
                 dispatch(addTodo(newTodo));
                 setLastId(lastId + 1)
+                closeForm();
             }
         }
         else {
@@ -59,8 +59,15 @@ const TodoForm = ({lastId, setLastId, form, setForm, formStatus, setFormStatus, 
                         <h4>Select label: </h4>
                         <div className='tagsColorContainer'>
                             {tags.map(t => (
-                                <div key={t.tag} className='tagsColor' style={{backgroundColor: t.color}}>
-                                    <input className='color_input' type={"checkbox"} onChange={handleChange} name={'tag'} value={t.tag} checked={t.check}/>
+                                <div key={t.label} className='tagsColor'>
+                                    <label>{t.label} :</label>
+                                    <input
+                                        className='color_input'
+                                        type={"checkbox"}
+                                        onChange={handleChange} name={'tag'}
+                                        defaultValue={t.label}
+                                        checked={form.tag === t.label ? true : false}
+                                        style={{backgroundColor: t.value}}/>
                                 </div>
                             ))}
                         </div>

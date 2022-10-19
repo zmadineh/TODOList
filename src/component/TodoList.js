@@ -1,11 +1,14 @@
 import React from "react";
-import { FaCheckCircle, FaRegCircle, FaRegTrashAlt, FaEdit } from "react-icons/fa";
+import { FaCheckCircle, FaRegCircle, FaRegTrashAlt, FaEdit} from "react-icons/fa";
+import { BsBookmarkCheck, BsBookmark } from "react-icons/bs"
 import '../App.css';
 import {useDispatch, useSelector} from "react-redux";
 import {removeTodo, checkTodo, showTodoDec} from "../toolkit/slices/todo.slice";
 import clsx from "clsx";
+import {FILTER_MAP} from "../data/filterOptions";
+import NothingToShow from "./NothingToShow";
 
-const TodoList = ({setForm, setFormStatus, tags, setFormEnable}) => {
+const TodoList = ({setForm, setFormStatus, tags, setFormEnable, tagSelected, filterSelected, search}) => {
 
     const todos = useSelector((state) => state.todo.todos);
     const dispatch = useDispatch();
@@ -29,7 +32,7 @@ const TodoList = ({setForm, setFormStatus, tags, setFormEnable}) => {
     }
 
     const handleTagColor = todo => {
-        const tagColor = tags.filter(t => t.tag === todo.tag)[0].color;
+        const tagColor = tags.filter(t => t.label === todo.tag)[0].value;
         const style = {
             borderColor: tagColor,
             backgroundColor: tagColor,
@@ -37,19 +40,32 @@ const TodoList = ({setForm, setFormStatus, tags, setFormEnable}) => {
         return style;
     }
 
+    const todoFilter = () => {
+        let todoList = todos.filter(FILTER_MAP[filterSelected]);
+        if (filterSelected === 'ByTag')
+            todoList = todoList.filter(todo => todo.tag === tagSelected)
+        if (search)
+            todoList = todoList.filter(todo => (todo.title.toLowerCase().includes(search)))
+        return { todoList, length: todoList.length };
+    }
+
     return (
         <div className='todoContainer'>
-        {todos.length > 0 ? todos.map(todo => (
-                <div key={todo.id} className="todoItem" style={todo.check ? {borderColor: '#D8D8D8'} :  handleTagColor(todo)}>
+        {todoFilter().todoList.map(todo => (
+                <div key={todo.id} className="todoItem" style={todo.completed ? {borderColor: '#D8D8D8'} :  handleTagColor(todo)}>
                     <div className='checkItem'>
                         <div onClick={() => handleCheck(todo)}>
-                            {todo.check ? <FaCheckCircle className='doneCircle'/> : <FaRegCircle className='notDoneCircle'/>}
+                            {todo.completed ? <FaCheckCircle className='doneCircle'/> : <FaRegCircle className='notDoneCircle'/>}
                         </div>
                     </div>
                     <div className='todoText'  onClick={() => showDec(todo)}>
-                        <h4 className={clsx('todoTitle', todo.check && 'todo_checked')}>
+                        <h4 className={clsx('todoTitle', todo.completed && 'todo_checked')}>
                             {todo.title}
                         </h4>
+                        <p className={clsx('todoTag', todo.active && 'd-flex', !todo.active && 'd-none')}>
+                            {todo.completed ? <BsBookmarkCheck /> : <BsBookmark />}
+                            {todo.tag}
+                        </p>
                         <p className={clsx('todoDec', todo.active && 'd-flex', !todo.active && 'd-none')}>
                             {todo.dec}
                         </p>
@@ -63,11 +79,11 @@ const TodoList = ({setForm, setFormStatus, tags, setFormEnable}) => {
                         </button>
                     </div>
                 </div>
-            )) :
+        ))}
         <div>
-            !!!!!
+            { todoFilter().length === 0 ? <NothingToShow /> : null }
         </div>
-            }
+
         </div>
     )
 }

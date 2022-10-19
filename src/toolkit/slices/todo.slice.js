@@ -21,7 +21,7 @@ export const todoSlice = createSlice({
         checkTodo: (state, action) => {
             const todo = state.todos.find((todo) => todo.id === action.payload.id)
             if (todo)
-                todo.check = !todo.check;
+                todo.completed = !todo.completed;
         },
         showTodoDec: (state, action) => {
             state.todos.forEach(todo => {
@@ -29,6 +29,11 @@ export const todoSlice = createSlice({
                 else todo.active = false;
             });
         },
+        collapseTodo: (state) => {
+            state.todos.forEach(todo => {
+                todo.active = false;
+            });
+        }
     },
 });
 
@@ -38,6 +43,7 @@ export const {
     updateTodo,
     checkTodo,
     showTodoDec,
+    collapseTodo,
 } = todoSlice.actions;
 
 export default todoSlice.reducer;
