@@ -28,7 +28,8 @@ const HomePage = () => {
 
     const [form, setForm] = useState(emptyForm)
     const [formStatus, setFormStatus] = useState('add')
-    const [lastId, setLastId] = useState(todos.length !== 0 ? todos[todos.length-1].id : 0)
+    const lastID = todos.length !== 0 ? todos[todos.length-1].id : 0;
+    const [lastId, setLastId] = useState(lastID)
     const [formEnable, setFormEnable] = useState(false)
     const [filterSelected, setFilterSelected] = useState('All')
     const [tagSelected, setTagSelected] = useState( 'default')

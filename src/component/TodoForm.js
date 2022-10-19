@@ -66,7 +66,7 @@ const TodoForm = ({lastId, setLastId, form, setForm, formStatus, setFormStatus, 
                                         type={"checkbox"}
                                         onChange={handleChange} name={'tag'}
                                         defaultValue={t.label}
-                                        checked={form.tag === t.label ? true : false}
+                                        checked={form.tag === t.label}
                                         style={{backgroundColor: t.value}}/>
                                 </div>
                             ))}
