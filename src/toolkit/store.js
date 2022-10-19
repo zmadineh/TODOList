@@ -17,8 +17,8 @@ const rootReducer = combineReducers({
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
-    reducer: { todo: todoSlice,},
-    // reducer: persistedReducer,
+    // reducer: { todo: todoSlice,},
+    reducer: persistedReducer,
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });
 

@@ -10,7 +10,7 @@ const TodoForm = ({lastId, setLastId, form, setForm, formStatus, setFormStatus, 
     const dispatch = useDispatch();
 
     const handleChange = e => {
-        console.log(form)
+        // console.log(form)
         setTags(tags.map(t => t.label === e.target.value ? {...t ,check: true} : {...t ,check: false}))
         setForm({...form, [e.target.name]: e.target.value})
     }
@@ -50,9 +50,9 @@ const TodoForm = ({lastId, setLastId, form, setForm, formStatus, setFormStatus, 
                 <form onSubmit={handleSubmit}>
                     <div className='todoForm'>
                         <h4>Title</h4>
-                        <input className={clsx('formTitle_input', 'margin_20')} onChange={handleChange} name={'title'} value={form.title} />
+                        <input className={clsx('formTitle_input', 'formText_input', 'margin_20')} onChange={handleChange} name={'title'} value={form.title} />
                         <h4>Description</h4>
-                        <input className={clsx('formDec_input', 'margin_20')}  onChange={handleChange} name={'dec'} value={form.dec} />
+                        <input className={clsx('formDec_input', 'formText_input', 'margin_20')}  onChange={handleChange} name={'dec'} value={form.dec} />
                     </div>
 
                     <div className='selectLabel'>
