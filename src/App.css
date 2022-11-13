@@ -67,6 +67,7 @@
 }
 
 .add_btn {
+  z-index: 10000;
   position: fixed;
   bottom: 30px;
   left: 30px;
