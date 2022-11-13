@@ -18,9 +18,9 @@ function App () {
 
     return (
         <Provider store={store}>
-            {/*<PersistGate persistor={persistor} loading={<div>...loading</div>}>*/}
+            <PersistGate persistor={persistor} loading={<div>...loading</div>}>
                 <RouterProvider router={router} />
-            {/*</PersistGate>*/}
+            </PersistGate>
         </Provider>
     )
 }

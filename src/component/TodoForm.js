@@ -1,9 +1,9 @@
 import React from "react";
 import {useDispatch} from "react-redux";
 import {addTodo, updateTodo} from "../toolkit/slices/todo.slice";
-import '../App.css';
 import clsx from "clsx";
 import {emptyForm} from "../data/emptyForm";
+import '../App.css';
 
 const TodoForm = ({lastId, setLastId, form, setForm, formStatus, setFormStatus, tags, setTags , formEnable, setFormEnable}) => {
 
