@@ -32,10 +32,10 @@ const TodoList = ({setForm, setFormStatus, tags, setFormEnable, tagSelected, fil
     }
 
     const handleTagColor = todo => {
-        const tagColor = tags.filter(t => t.label === todo.tag)[0].value;
+        const tagColor = tags.filter(t => t.label === todo.tag);
         const style = {
-            borderColor: tagColor,
-            backgroundColor: tagColor,
+            borderColor: tagColor ? tagColor[0].value : '#000',
+            backgroundColor: tagColor ? tagColor[0].value : '#000',
         }
         return style;
     }
